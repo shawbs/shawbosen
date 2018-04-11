@@ -1,0 +1,36 @@
+@import 'variable';
+
+a{color: $acolor;text-decoration: none}
+a:hover,a:active,.link:hover{color: #CD8500;text-decoration:none}
+.link{cursor: pointer; color: $acolor}
+
+
+.container{
+    // width: 1024px;
+    // margin: 0 auto;
+}
+
+.clearfix{
+    &:before,&:after{
+        content: '';
+        display: table;
+    }
+    &:after{
+        clear: both;
+    }
+}
+.pull-right{
+    float: right;
+}
+.pull-left{
+    float: left;
+}
+.text-right{
+    text-align: right;
+}
+.text-center{
+    text-align: center;
+}
+.gray{
+    color: gray;
+}
