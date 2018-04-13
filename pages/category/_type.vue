@@ -27,10 +27,7 @@
             </h5>
             <hr class="my-3">
             <div class="_body">
-              <p>
-                <nuxt-link to="/other/about">个人简介</nuxt-link>
-              </p>
-              <img src="~assets/image/we_code.jpg" alt="微信二维码" width="150">
+              <nuxt-link to="/other/about">个人简介</nuxt-link>
             </div>
           </div>
           
@@ -51,7 +48,7 @@ export default {
   components: {
     MainNav
   },
-  data(){
+  asyncData(context){
       return {
         arrs: [
           {

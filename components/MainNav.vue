@@ -15,7 +15,7 @@
 <script>
 
 export default {
-    name: 'main-nav',
+    name: 'main-nav-component',
     props : {
         navs: {
             type: Array,
@@ -35,6 +35,7 @@ export default {
         margin-right: -15px;
         .nav-link{
             font-size: 1.2rem;
+            color: #666;
 
             &.active{
                 color: rgba(0,0,0,.9);

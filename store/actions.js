@@ -5,10 +5,11 @@
  * 通过store.dispatch()提交
  */
 export default {
-    test({commit}){
+    login({commit}){
         commit('changeLoadState', true)
         setTimeout(() => {
             commit('changeLoadState', false)
+            commit('changeLoginState', true)
         }, 3000);
     }
 }

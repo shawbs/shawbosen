@@ -14,7 +14,7 @@
     import MainNav from '~/components/MainNav.vue'
 
     export default {
-        name: 'header-nav',
+        name: 'header-nav-component',
         components: {
             Logo,
             MainNav

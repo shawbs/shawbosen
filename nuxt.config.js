@@ -2,6 +2,7 @@ module.exports = {
   /*
   ** Headers of the page
   */
+
   head: {
     title: 'shawbosen',
     meta: [
@@ -9,9 +10,16 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
+    script: [
+      { src: 'https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js'},
+      { src: 'https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js'},
+      { src: 'https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js'},
+      { src: 'https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.js'}
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css' }
+      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css' },
+      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.css'}
     ]
   },
   css: [
@@ -27,7 +35,7 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#CD8500' },
   /*
   ** Build configuration
   */
