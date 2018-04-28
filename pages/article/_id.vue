@@ -1,21 +1,25 @@
-<template>
+<template v-if="$store.state.article">
     <section class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item" aria-current="page"><nuxt-link to="/">首页</nuxt-link></li>
-                <li class="breadcrumb-item" aria-current="page"><nuxt-link :to="'/category/'+article._type">{{article._type}}</nuxt-link></li>
-                <li class="breadcrumb-item active" aria-current="page">{{article._id}}</li>
+                <li class="breadcrumb-item" aria-current="page"><nuxt-link :to="'/category/'+$store.state.article.tag">{{$store.state.article.tag}}</nuxt-link></li>
+                <li class="breadcrumb-item active" aria-current="page">{{$store.state.article.id}}</li>
             </ol>
         </nav>
 
         <article class="article ">
-            <h2>{{article.title}}</h2>
-            <p class="text-muted "><small v-if="article.createDate">创建时间 {{article.createDate}}</small> <small v-if="article.updateDate">更新时间 {{article.updateDate}}</small></p>
+            <h2>{{$store.state.article.title}}</h2>
+            <p class="text-muted " v-if="$store.state.article.meta">
+                <small class="mr-2">创建时间 {{new Date($store.state.article.meta.createAt).format()}}</small>
+                <small>更新时间 {{new Date($store.state.article.meta.updateAt).format()}}</small>
+            </p>
             <hr class="my-4">
-            <div class="content">
-                {{article.content}}
+            <div class="content mb-5" v-html="$store.state.article.content">
+
 
             </div>
+            <h3 class="text-center">&lt; end &gt;</h3>
         </article>
         
 
@@ -24,22 +28,28 @@
 
 <script>
     import MainNav from '~/components/MainNav.vue'
+    import API from '~/api'
     export default {
         name: 'note-detail-page',
         // layout: 'base',
         components: {
             MainNav
         },
-        asyncData(context){
+        data(){
             return {
-                article: {
-                    title: 'npm install关于报错node-pre-gyp error',
-                    createDate: '2017.12.18 15:53*',
-                    content: "在stackoverflow上看到一个解决方法：<pre><code># before installing node-gyp ",
-                    _type: 'article',
-                    _id: '$asd126a1s6d4a6s'
-                }
             }
+        },
+        async fetch({store, params}){
+            
+            let {data} = await store.dispatch('get',{
+                url: API.url.actricleGetById,
+                param: {
+                    actricleId: params.id
+                }
+            })
+            // console.log(res)
+            store.commit('setArticle', data.actricle)
+            
         }
     }
 </script>

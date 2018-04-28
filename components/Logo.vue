@@ -13,6 +13,7 @@
 <style lang="scss">
     $width: 30px;
     $height: 30px;
+    
     .logo-box{
         display: block;
         width: $width;
@@ -63,6 +64,12 @@
         100%{
             transform:  rotateX(-30deg) rotateY(-207deg) rotateZ(-360deg);
         }
+    }
+
+    .top-logo{
+        position: absolute;
+        top: 0;
+        left: 20px;
     }
 
 </style>

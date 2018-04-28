@@ -60,20 +60,7 @@
 </template>
 <script>
     export default {
-        head: {
-            link: [
-                {
-                    rel: 'stylesheet',
-                    href: '/lib/bootstrap-datetimepicker.min.css'
-                }
-            ],
-            script: [
-                {
-                    src: '/lib/bootstrap-datetimepicker.min.js'
-                }
-            ]
-           
-        },
+        name: 'setting-page',
         mounted(){
             this.initDatepicker();
             $("#inputDatetime").datetimepicker({

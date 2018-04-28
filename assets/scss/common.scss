@@ -1,13 +1,11 @@
 @import 'variable';
 
 a{color: $acolor;text-decoration: none}
-a:hover,a:active,.link:hover{color: #CD8500;text-decoration:none}
 .link{cursor: pointer; color: $acolor}
-
+a:hover,a:active,.link:hover{color: $green;text-decoration:none;cursor: pointer}
 
 .container{
-    // width: 1024px;
-    // margin: 0 auto;
+    position: relative;
 }
 
 .clearfix{
@@ -34,3 +32,85 @@ a:hover,a:active,.link:hover{color: #CD8500;text-decoration:none}
 .gray{
     color: gray;
 }
+
+body{
+    background: #f5f5d5;
+}
+
+.chunk{
+    padding: 15px;
+    .btn{
+        margin: 5px;
+    }
+}
+.top-content{
+    text-align: right;
+    line-height: 28px;
+    min-height: 30px;
+    margin-bottom: 10px;
+    .link{
+        margin: 0 5px;
+    }
+}
+.line{
+    padding: 15px 0;
+    font-size: 14px;
+    line-height: 1.2em;
+    border-bottom: 1px dashed rgba(0,0,0,.1);
+  }
+.line-end{
+    text-align: center;
+    letter-spacing: 3px;
+    color: gray;
+}
+
+.brand{
+    margin-right: 10px;
+}
+
+pre{
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 4px;
+    margin-top: 10px; 
+}
+.article{
+    padding: 30px 5px;
+    line-height: 1.5em;
+    font-size: 1.2rem;
+}
+.m-button-group{
+    .btn{
+        margin: 5px;
+    }
+}
+.form-control.open+.dropdown-hint{
+    display: block;
+}
+.dropdown-hint{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 15px;
+    width: 90%;
+    z-index: 9;
+    .list-group{
+        border: 1px solid #ddd;
+    }
+    .list-group-item{
+        cursor: pointer;
+    }
+}
+.header{
+    height: 120px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.select{
+    padding: 6px;
+    border: 1px solid #fff;
+    border-radius: 6px;
+}
+
