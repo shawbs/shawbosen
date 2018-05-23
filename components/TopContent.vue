@@ -1,16 +1,13 @@
 <template>
     <div class="top-content">
-        <span class="brand">Shawbs</span>
         <template v-if="$store.state.user">
-
             <dropdown :content="$store.state.user.nickname"></dropdown>
-
-        
         </template>
         
         <template v-if="!$store.state.user">
             <nuxt-link class="link" to="/user/login">登录</nuxt-link>
         </template>
+        <nuxt-link to="/other/about" class="small ml-2">关于我</nuxt-link>
         
     </div>
 </template>
@@ -29,8 +26,7 @@
             }
         },
         mounted(){
-
-            this.$store.commit('setUser', util.getLocal('__shawbosen_user'))
+            this.$store.commit('setUser', util.getLocal('user'))
         }
     }
 </script>

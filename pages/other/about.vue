@@ -21,7 +21,7 @@
                 user:{
                     name: '萧伯森',
                     startWorkDate: 1420041600,
-                    desc: `一名前端程序员，从业${datetime.year}年，喜欢爬山`,
+                    desc: `前端程序员，从业${datetime.year}年。`,
                     email: '572249500@qq.com',
                     wechat: {
                         imgurl: ''

@@ -60,6 +60,7 @@ const verifyForm = function(id){
 }
 
 const setLocal = function(key,value){
+
     if(typeof value == 'string'){
         localStorage.setItem(key,value)
     }else{
@@ -68,6 +69,7 @@ const setLocal = function(key,value){
 }
 
 const getLocal = function(key){
+
     let result = localStorage.getItem(key);
     let _resutl;
     //只要result不是字符串(不包括JSON字符串),都可以进行JSON.parse()解析

@@ -3,7 +3,7 @@
         <section class="container">
             <top-content />
             <div class="header">
-                <logo/>
+                <span @click="$router.push('/')">SHAWBOSEN</span>
             </div>
             
         </section>

@@ -13,7 +13,7 @@
             </div>
             <button type="button" class="btn btn-primary mr-2" @click="submitForm">
                 登录
-                <i v-if="$store.state.loading" class="fa fa-spinner fa-pulse"></i>
+                
             </button>
             <button type="reset" class="btn btn-danger">重置</button>
             <p class="alert" :class="{'alert-success': msg == '登录成功','alert-danger': msg != '登录成功'}" v-if="msg">{{msg}}</p>
@@ -25,6 +25,7 @@
     import Logo from '~/components/Logo'
     import API from '~/api'
     import util from '~/util/base'
+    import p from '~/util/plugin'
     export default{
         name: 'login-page',
         layout: 'base',
@@ -34,6 +35,9 @@
                 password: '',
                 msg: '',
             }
+        },
+        mounted(){
+
         },
         methods: {
             loginHandle(){
@@ -48,19 +52,18 @@
                     showload: true
                 })
                 .then(res=>{
-                    if(res.code == 200){
-                        _this.msg = '登录成功'
-                        util.setLocal('__shawbs_token',res.token)
-                        util.setLocal('__shawbs_refresh_token',res.refresh_token)
-                        util.setLocal('__shawbs_loginState',true)
-                        _this.$emit('refreshUserData')
-                        _this.$store.commit('setUser', res.data.user)
-                        setTimeout(function(){
-                            _this.$router.push('/')
-                        },1000)
-                    }else{
-                        _this.msg = res.msg
-                    }
+
+                    p.toast('登录成功','success')
+                    util.setLocal('__shawbs_token',res.token)
+                    util.setLocal('__shawbs_refresh_token',res.refresh_token)
+                    util.setLocal('loginState',true)
+                    util.setLocal('user',res.data.user)
+                    this.$store.commit('setUser', util.getLocal('user'))
+
+                    setTimeout(function(){
+                        _this.$router.push('/')
+                    },1000)
+
                 })
                 .catch(err=>{})
             },
@@ -69,7 +72,7 @@
                 if(result.status){
                     this.loginHandle();
                 }else{
-                    this.msg = `${result.target}不能为空`
+                    p.toast(`${result.target}不能为空`,'warn')
                 }
                 
             }

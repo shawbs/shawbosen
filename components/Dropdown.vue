@@ -1,6 +1,6 @@
 <template>
     <div class="dropdown">
-        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{content}}
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
@@ -10,7 +10,6 @@
             <div class="dropdown-item">
                 <nuxt-link class="link dropdown-item" to="/user/setting">编辑个人资料</nuxt-link>
             </div>
-            <div class="dropdown-divider"></div>
             <div class="dropdown-item " @click="exitHandle">
                 <span class="link">退出</span>
             </div>
@@ -34,8 +33,10 @@
 
             exitHandle(){
                 localStorage.removeItem('__shawbs_token');
-                localStorage.removeItem('__shawbs_loginState')
-                localStorage.removeItem('__shawbosen_user')
+                localStorage.removeItem('__shawbs_refresh_token');
+                localStorage.removeItem('loginState')
+                localStorage.removeItem('user')
+                this.$store.commit('setUser', null)
                 this.$router.push('/user/login')
             }
         }

@@ -2,6 +2,7 @@
 import axios from 'axios'
 
 axios.defaults.baseURL = 'http://127.0.0.1:8090';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 const url = {
@@ -15,7 +16,8 @@ const url = {
     getTags: '/shawbosen/actricle/getTags',
     getArticleByTag: '/shawbosen/actricle/getActricle/tag',
     getActricleGroupByTag: '/shawbosen/actricle/getActricleGroup/tag',
-    deleteArticle: '/shawbosen/actricle/delete'
+    deleteArticle: '/shawbosen/actricle/delete',
+    verifyToken: '/shawbosen/verifyToken'
 }
 
 const get = (url,parameter)=> {

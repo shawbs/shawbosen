@@ -8,7 +8,7 @@
 
         <div class="main">
           <hr class="my-3">
-          <div class="line row" v-for="(item,key) in actricleList" :key="key" v-if="$store.state.loginState?true:(!item.private)">
+          <div class="line row" v-for="(item,key) in actricleList" :key="key">
             <div class="col-sm-8 link" :data-id="item.id" @click="linkArticleDetail">[{{item.tag}}]&nbsp;{{item.title}}</div>
             <div class="col-sm text-muted"><small>{{new Date(item.meta.updateAt).format()}}</small></div>
 
@@ -49,14 +49,6 @@ export default {
   mounted(){
     this.init();
     this.getTags();
-
-    this.$store.dispatch('checkLogin')
-    .then(res=>{
-      this.$store.commit('changeLoginState', true)
-    })
-    .catch(err=>{
-      this.$store.commit('changeLoginState', false)
-    })
   },
   methods: {
     linkArticleDetail(e){
@@ -66,14 +58,17 @@ export default {
       }
     },
 
-    init(){
-        this.$store.dispatch('get',{
-            url: API.url.actricleGetAll,
+    init(tag = this.params.index){
+        this.$store.dispatch('post',{
+            url: API.url.getArticleByTag,
+            param: {
+                tag: tag
+            },
             showload: true
         })
-        .then(res=>{
-            this.actricleList = res.data.actricle
-        })
+      .then(res=>{
+          this.actricleList = res.data.actricle
+      })
     },
 
     getTags(){

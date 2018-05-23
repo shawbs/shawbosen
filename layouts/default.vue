@@ -1,27 +1,20 @@
 <template>
-  <div>
-    <section class="container">
-        <top-content class="mb-5 mt-3"/>
-        <logo class="top-logo"/>            
-    </section>
-    <nuxt/>
-  </div>
+    <div>
+        <section class="container clearfix mb-4">
+            <span class="float-left brand" @click="$router.push('/')">SHAWBOSEN</span>
+            <top-content class="float-right"/>      
+        </section>
+        
+        <nuxt />
+    </div> 
 </template>
 
 <script>
     import TopContent from '~/components/TopContent.vue'
-    import Logo from '~/components/Logo.vue'
     export default {
         components: {
-          TopContent,
-          Logo
+            TopContent
         }
-
-
 
     }
 </script>
-
-
-
-

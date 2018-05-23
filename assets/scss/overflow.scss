@@ -38,8 +38,12 @@
     .list-group {
         display: none;
         .list-group-item{
-            background-color: rgba(0,0,0,.1);
+            background-color: rgba(0,0,0,.5);
             border-radius: 0;
+        }
+        .list-group-item-danger{
+            color: #721c24;
+            background-color: #f5c6cb;
         }
     }
     
@@ -51,22 +55,20 @@
 .dropdown-menu{
     border-radius: 4px;
     border: 1px solid #6c757d;
-    background-color: #333333;
+    background-color: #111;
     .dropdown-item{
-        padding-left: 0;
-        padding-right: 0;
+        padding: 0;
         text-align: center;
         cursor: pointer;
-        color: #cccccc;
+        color: #ddd;
         &:active,&:hover{
-            background-color: #666666;
+            background-color: #222;
             color: $green;
         }
 
         .link,a{
-            display: block;
-            color: #cccccc;
-
+            color: #ddd;
+            margin: 0;
             &:hover{
                 color: $green;
             }
@@ -78,3 +80,5 @@
     width: 23px;
     height: 23px;
 }
+
+

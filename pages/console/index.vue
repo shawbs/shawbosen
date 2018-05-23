@@ -4,13 +4,14 @@
             <div class="row">
                 <div class="col-sm">
                     <div class="list-group">
-                        <button type="button" @click="createArticle"  class="list-group-item list-group-item-danger list-group-item-action">新建</button>
+                        <button type="button" @click="newArticle"  class="list-group-item list-group-item-dark  list-group-item-action">新建</button>
                         
                         <button type="button" @click="toggleList"  class="list-dropdown list-group-item list-group-item-action" v-for="(val,key,index) in actricleList" :key="key">
 
-                            <div class="list-head">{{key}}<span class="badge badge-primary badge-pill">{{val.length}}</span></div>
+                            <div class="list-head" >{{key}}<span class="badge badge-primary badge-pill">{{val.length}}</span></div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item menu-item" @click="selectArticle" v-for="(item,key) in val" :key="key" :data-id="item.id">
+                                
+                                <li class="list-group-item menu-item " :data-name="key" @click="selectArticle" v-for="(item,_key) in val" :key="_key" :data-id="item.id">
                                     {{item.title}} 
                                     <i class="delete-btn fa fa-times" @click="removeArticle" :data-id="item.id"></i>
                                 </li>
@@ -31,16 +32,13 @@
                         <div class="form-group row">
                             <label for="inputTag" class="col-sm-2 col-form-label">标签</label>
                             <div class="col-sm-10">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">已有标签</button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:;" v-for="tag in $store.state.tags">{{tag.tag}}</a>
-                                        </div>
+                                <div class="input-group tag mb-3">
+                                    <input type="text" class="form-control" list="tags" id="inputTag" title="标签" name="tag" :value="tag" autocomplete="off"/>
+                                    <div class="dropdown-view" id="tags">
+                                        <div class="dropdown-line" @click="selectTag" v-for="(item,index) in $store.state.tags" :key="index" :data-color="item.tagColor">{{item.tag}}</div>
                                     </div>
-                                    <input type="text" class="form-control" id="inputTag" placeholder="输入标签" title="标签">
                                     <div class="input-group-append">
-                                        <input type="text" id="colorPicker" class="input-group-text" value="#000000" />
+                                        <input type="text" id="colorPicker" class="input-group-text" value="#ff0000" name="tagColor"/>
                                     </div>
                                 </div>
                                 
@@ -56,7 +54,7 @@
                             <label class="col-sm-2"></label>
                             <div class="col-sm-10">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="private">
+                                    <input type="checkbox" class="form-check-input" id="private" :checked="article.private">
                                     <label class="form-check-label" for="private">仅自己可见</label>
                                 </div>
                             </div>
@@ -64,8 +62,7 @@
                         <div class="row">
                             <label class="col-sm-2"></label>
                             <div class="col-sm-10">
-                                <button type="button" class="btn btn-primary" @click="saveFormData">发布</button>&nbsp;
-                         
+                                <button type="button" class="btn btn-primary" @click="saveFormData">提交</button>&nbsp;
                                 <button type="reset" class="btn btn-danger">重置</button>&nbsp;
                             </div>
                         </div>
@@ -75,12 +72,16 @@
                 </div>
             </div>
         </section>
+
     </div>
+
+    
 </template>
 
 <script>
     import API from '~/api'
     import util from '~/util/base'
+
 
     let simplemde = null;
     export default {
@@ -91,14 +92,17 @@
                 success_msg: '',
                 actricleList: [],
                 article: {},
-
+                tag: '',
+                formData: {}
             }
         },
+
 
         mounted(){
             this.initMinicolors();
             this.initMarkdown();
             this.getActricleByGroup();
+            
 
             $('.list-dropdown').on('click', function(e){
                 if(e.target.className.indexOf('list-head')!=-1){
@@ -114,7 +118,7 @@
                 if(e.type == 'blur'){
                     setTimeout(function(){
                          $(self).removeClass('open')
-                    },300)
+                    },200)
                 }
             })
             
@@ -123,9 +127,8 @@
 
             //初始化拾色器
             initMinicolors(){
-                $('#colorPicker').minicolors({
-
-					control: $(this).attr('data-control') || 'hue',
+                let conf = {
+                    control: $(this).attr('data-control') || 'hue',
 
 					defaultValue: $(this).attr('data-defaultValue') || '',
 
@@ -152,36 +155,15 @@
 					},
 
 					theme: 'bootstrap'
-
-				});
-
-
-            },
-
-            getTag(){
-                let result = null;
-                if( $('#tag1').is(':visible') ){
-                    let str = $('#selectTag').val();
-                    let arr;
-                    if(!!str && str != '0'){
-                        arr = str.split('/')
-                        result = {
-                            tag: arr[0],
-                            tagColor: arr[1]
-                        }
-                    }
-                }else if( $('#tag2').is(':visible') ) {
-                    let tag = $('#inputTag').val();
-                    if(!!tag){
-                        result = {
-                            tag: tag,
-                            tagColor: $('#colorPicker').val()
-                        }
-                    }
                 }
-                return result
+                $('#colorPicker').minicolors(conf);
+
             },
 
+            setMinicolor(color){
+                $('.minicolors-swatch-color').eq(0).css('backgroundColor',color);
+                $('#colorPicker').val(color)  
+            },
 
 
             //初始化编辑器
@@ -189,15 +171,16 @@
                 simplemde = new SimpleMDE({ element: document.getElementById("editor") });
             },
 
+            //验证表单
             verifyForm(){
                 let form = document.getElementById('articleForm').elements;
-
-                let falg =true;
+                let falg=true;
                 for(var i=0;i<form.length;i++){
-                    let input = form[i]
+                    let input = form[i];
                     if( !!input.name){
                         if(!!input.value){
                             this.error_msg = '';
+                            this.formData[input.name] = input.value
                         }else{
                             this.error_msg = `${input.title}不能为空`;
                             falg = false;
@@ -205,65 +188,67 @@
                         }
                     }
                  }
-
-                return falg;
-
+                 return falg
             },
 
             //提交表单
             saveFormData(){
-                 let status = this.verifyForm();
-
-                 let contentHTML = simplemde.value();
-                 let tag = this.getTag();
-                 if(!status){
-                     return
-                 }
-                 if(!tag){
-                    this.error_msg = `标签不能为空`;
+                let status = this.verifyForm();
+                let contentHTML = simplemde.value();
+                console.log(status,this.formData)
+                if(!status){
                     return
                 }
+
                 if(!contentHTML){
                     this.error_msg = `内容不能为空`;
                     return
                 }
                 
-                console.log(tag,contentHTML)
-                 let _this = this;
-                 API.refreshToken()
-                 .then(function(token){
-                    let parameter = {
-                        id: $('#articleForm').data('id'),
-                        title: $('#inputTitle').val(),
-                        tag: tag.tag,
-                        tagColor: tag.tagColor,
-                        content: contentHTML,
-                        private: $('#private').get(0).checked,
-                        accessToken: token
-                    };
-                    _this.addOrUpdate(parameter);
+                // console.log(contentHTML)
+                let _this = this;
 
-                })
-
-
-                 
+                let parameter = $.extend(this.formData, {
+                    id: $('#articleForm').data('id'),
+                    content: contentHTML,
+                    private: $('#private').get(0).checked
+                });
+                _this.addOrUpdate(parameter);
 
             },
 
             //发表文章或更新
             async addOrUpdate(parameter){
+                this.success_msg='';
+                this.error_msg='';
                 let url = !!parameter.id ? API.url.actricleUpdate : API.url.actricleAdd;
 
                 let res = await this.$store.dispatch('post', {
                     url: url,
-                    param: parameter
+                    param: parameter,
+                    showload: true
                 })
-
                 if(res.code == 200){
-                    this.success_msg = res.msg;
+                    this.setSuccessMsg(res.msg);
                 }else{
-                    this.error_msg = res.msg
+                    this.setErrorMsg(res.msg);
                 }
+            },
+
+            setSuccessMsg(msg){
+                let that = this;
+                that.success_msg = msg;
+                setTimeout(function(){
+                    that.success_msg = '';
+                },3000)
+            },
+
+            setErrorMsg(msg){
+                let that = this;
+                that.error_msg = msg;
+                setTimeout(function(){
+                    that.error_msg = '';
+                },3000)
             },
 
             //获取分类文章
@@ -282,20 +267,32 @@
                 })
             },
 
+            newArticle(){
+                this.article = {};
+                this.tag = '';
+                simplemde.value('');
+            },
+
+            selectTag(e){
+                let target = e.target;
+                this.tag = $(target).text()
+                console.log(e,$(target).text(),$(target).data('color'))
+                this.setMinicolor($(target).data('color'))
+            },
+
             toggleList(e){
-                var target = $(e.target).next();
-                if(target.hasClass('list-group-flush')){
-                    target.toggle();
+                let target = $(e.target);
+                let list = target.next();
+                let parent = target.parent();
+                if(target.hasClass('list-head')){
+                    parent.siblings().find('.list-group-flush').slideUp();
+                    if(list.hasClass('list-group-flush')){
+                        list.slideToggle();
+                    }
                 }
                 
             },
             
-            createArticle(){
-                this.article = {}
-                simplemde.value('')
-                $('#selectTag').val('0')
-            },
-
             removeArticle(e){
                 let target = e.target;
                 let _this = this;
@@ -307,14 +304,15 @@
             selectArticle(e){
                 let target = e.target;
                 let _this = this;
+                _this.tag = $(target).data('name') || '';
                 if(target.nodeName == 'LI'){
                     _this.getArticleInfo(target.dataset.id)
                     .then(data=>{
 
                         _this.article = data.actricle;
                         let val = _this.article.tag + '/' + _this.article.tagColor;
-                        $('#selectTag').val(val);
-                        simplemde.value(_this.article.content)    
+                        simplemde.value(_this.article.content)  
+                        _this.setMinicolor(data.actricle.tagColor)  
                     })
                     
                 }
@@ -322,28 +320,25 @@
 
             deleteArticle(id){
                 let _this = this;
-                API.refreshToken()
-                .then(token=>{
-                    _this.$store.dispatch('post',{
-                        url: API.url.deleteArticle,
-                        param: {
-                            accessToken: token,
-                            actricleId: id
-                        },
-                        showload: true
-                    })
-                    .then(data=>{
-                        if(data.code == 200){
-                            if(data.data.isSuccess){
-                                this.getActricleByGroup();
-                                _this.createArticle();
-                                _this.success_msg = '删除成功'
-                            }else{
-                                _this.error_msg = '删除失败'
-                            }
-                        }
-                    })
+                _this.$store.dispatch('post',{
+                    url: API.url.deleteArticle,
+                    param: {
+                        actricleId: id
+                    },
+                    showload: true
                 })
+                .then(data=>{
+                    if(data.code == 200){
+                        if(data.data.isSuccess){
+                            this.getActricleByGroup();
+                            _this.createArticle();
+                            _this.success_msg = '删除成功'
+                        }else{
+                            _this.error_msg = '删除失败'
+                        }
+                    }
+                })
+
                 
             },
 
