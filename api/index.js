@@ -1,8 +1,10 @@
 
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8090'; //dev
-axios.defaults.baseURL = 'http://shawbosen/node'; //prod
+//dev
+// axios.defaults.baseURL = 'http://127.0.0.1:8090'; 
+//prod
+axios.defaults.baseURL = 'http://shawbosen/node'; 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
