@@ -1,10 +1,8 @@
 
 import axios from 'axios'
+import conf from '~/config.js'
 
-//dev
-// axios.defaults.baseURL = 'http://127.0.0.1:8090'; 
-//prod
-axios.defaults.baseURL = 'http://shawbosen/node'; 
+axios.defaults.baseURL = conf[conf.env].host; 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
