@@ -32,6 +32,7 @@
     import MainNav from '~/components/MainNav.vue'
     import API from '~/api'
     import p from '~/util/plugin'
+    import marked from 'marked'
     export default {
         name: 'note-detail-page',
         // layout: 'base',
@@ -77,7 +78,7 @@
                     }
                 })
                 let actricle = data.actricle;
-                actricle.content = new SimpleMDE().markdown(actricle.content || '');
+                actricle.content = marked(actricle.content || '');
                 this.article = actricle;
             }
         }
