@@ -66,8 +66,7 @@
                                 <button type="reset" class="btn btn-danger">重置</button>&nbsp;
                             </div>
                         </div>
-                        <p class="alert alert-danger" v-if="error_msg">{{error_msg}}</p>
-                        <p class="alert alert-success" v-if="success_msg">{{success_msg}}</p>
+
                     </form>
                 </div>
             </div>
@@ -81,15 +80,14 @@
 <script>
     import API from '~/api'
     import util from '~/util/base'
-
+    import p from '~/util/plugin'
 
     let simplemde = null;
     export default {
         name: 'console-index-page',
         data(){
             return {
-                error_msg: '',
-                success_msg: '',
+
                 actricleList: [],
                 article: {},
                 tag: '',
@@ -148,7 +146,7 @@
 
 						try {
 
-							console.log(hex);
+							// console.log(hex);
 
 						} catch(e) {}
 
@@ -195,7 +193,7 @@
             saveFormData(){
                 let status = this.verifyForm();
                 let contentHTML = simplemde.value();
-                console.log(status,this.formData)
+
                 if(!status){
                     return
                 }
@@ -206,50 +204,32 @@
                 }
                 
                 // console.log(contentHTML)
-                let _this = this;
-
                 let parameter = $.extend(this.formData, {
                     id: $('#articleForm').data('id'),
                     content: contentHTML,
                     private: $('#private').get(0).checked
                 });
-                _this.addOrUpdate(parameter);
+                this.addOrUpdate(parameter);
 
             },
 
             //发表文章或更新
-            async addOrUpdate(parameter){
+            addOrUpdate(parameter){
                 this.success_msg='';
                 this.error_msg='';
                 let url = !!parameter.id ? API.url.actricleUpdate : API.url.actricleAdd;
 
-                let res = await this.$store.dispatch('post', {
+                this.$store.dispatch('post', {
                     url: url,
                     param: parameter,
                     showload: true
+                }).then(data=>{
+                    p.toast('提交成功','success')
                 })
-                if(res.code == 200){
-                    this.setSuccessMsg(res.msg);
-                }else{
-                    this.setErrorMsg(res.msg);
-                }
+
             },
 
-            setSuccessMsg(msg){
-                let that = this;
-                that.success_msg = msg;
-                setTimeout(function(){
-                    that.success_msg = '';
-                },3000)
-            },
 
-            setErrorMsg(msg){
-                let that = this;
-                that.error_msg = msg;
-                setTimeout(function(){
-                    that.error_msg = '';
-                },3000)
-            },
 
             //获取分类文章
             getActricleByGroup(){
@@ -259,11 +239,9 @@
                     showload: true
                 })
                 .then(res=>{
-                    if(res.code==200){
+
                     _this.actricleList = res.data.articleList
-                    }else{
-                    console.log(res.msg)
-                    }
+
                 })
             },
 
@@ -276,7 +254,7 @@
             selectTag(e){
                 let target = e.target;
                 this.tag = $(target).text()
-                console.log(e,$(target).text(),$(target).data('color'))
+
                 this.setMinicolor($(target).data('color'))
             },
 

@@ -10,7 +10,7 @@
           <hr class="my-3">
           <div class="line row" v-for="(item,key) in actricleList" :key="key">
             <div class="col-sm-8 link" :data-id="item.id" @click="linkArticleDetail">[{{item.tag}}]&nbsp;{{item.title}}</div>
-            <div class="col-sm text-muted"><small>{{new Date(item.meta.updateAt).format()}}</small></div>
+            <div class="col-sm text-muted"><small>{{new Date(item.updateAt).format()}}</small></div>
 
           </div>
           <div class="line-end">

@@ -18,7 +18,10 @@ const url = {
     getArticleByTag: '/shawbosen/actricle/getActricle/tag',
     getActricleGroupByTag: '/shawbosen/actricle/getActricleGroup/tag',
     deleteArticle: '/shawbosen/actricle/delete',
-    verifyToken: '/shawbosen/verifyToken'
+    verifyToken: '/shawbosen/verifyToken',
+    UserInfoUpdata: '/shawbosen/user/info/update',
+    userInfo: '/shawbosen/user/info',
+    userInfoSimple: '/shawbosen/user/info/simple'
 }
 
 const get = (url,parameter)=> {
