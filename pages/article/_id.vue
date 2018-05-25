@@ -13,7 +13,7 @@
             <p class="text-muted clearfix" v-if="article">
                 <small class="mr-2">创建时间 {{new Date(article.createAt).format()}}</small>
                 <small>更新时间 {{new Date(article.updateAt).format()}}</small>
-                <small class="float-right link gray" @click="deleteActricle">删除文章</small>
+                <small class="float-right link gray" @click="deleteActricle" v-if="$store.state.loginState">删除文章</small>
                 
             </p>
             <hr class="my-4">
@@ -77,7 +77,7 @@
                     }
                 })
                 let actricle = data.actricle;
-                actricle.content = new SimpleMDE().markdown(actricle.content);
+                actricle.content = new SimpleMDE().markdown(actricle.content || '');
                 this.article = actricle;
             }
         }
