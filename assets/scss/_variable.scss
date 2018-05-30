@@ -1,8 +1,8 @@
 $bodybgcolor:#f3f3f3;
-$bodycolor:rgba(0, 0, 0, 0.65);
-$acolor:#333;
-$basecolor: '#222222';
-$themeColor: '#1aad19';
+$bodycolor:#1e1e1e;
+$acolor:rgba(68,181,73, 0.8);
+$basecolor: #666;
+$themeColor: #1aad19;
 $green: #44b549;//#44b549
 
 // uri
@@ -33,6 +33,10 @@ $searchbg:'../asset/6436.jpg';
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
+}
+
+%boxshaw{
+  box-shadow: 0 0 0 .2rem rgba(52,58,64,.5);
 }
 
 

@@ -1,5 +1,8 @@
 @import 'variable';
-
+body{
+    background: $bodycolor;
+    color: $basecolor;
+}
 a{color: $acolor;text-decoration: none}
 .link{cursor: pointer; color: $acolor}
 a:hover,a:active,.link:hover{color: $green;text-decoration:none;cursor: pointer}
@@ -7,7 +10,15 @@ a:hover,a:active,.link:hover{color: $green;text-decoration:none;cursor: pointer}
 .container{
     position: relative;
 }
+.container-full{
+    width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
 
+    @media screen and(max-width: 1480px){
+        width: 95%;
+    }
+}
 .clearfix{
     &:before,&:after{
         content: '';
@@ -33,9 +44,7 @@ a:hover,a:active,.link:hover{color: $green;text-decoration:none;cursor: pointer}
     color: gray;
 }
 
-body{
-    background: #f5f5d5;
-}
+
 
 .chunk{
     padding: 15px;
@@ -50,13 +59,14 @@ body{
     margin-bottom: 10px;
     .link{
         margin: 0 5px;
+        color: #cccccc;
     }
 }
 .line{
     padding: 15px 0;
     font-size: 14px;
     line-height: 1.2em;
-    border-bottom: 1px dashed rgba(0,0,0,.1);
+    border-bottom: 1px dashed #333333;
   }
 .line-end{
     text-align: center;
@@ -68,6 +78,7 @@ body{
     line-height: 30px;
     margin-right: 10px;
     cursor: pointer;
+    color: #fff3cd;
 }
 
 pre{
@@ -80,6 +91,9 @@ pre{
     padding: 30px 5px;
     line-height: 1.5em;
     font-size: 1.2rem;
+    .title{
+        color: #CD8500;
+    }
 }
 .m-button-group{
     .btn{
@@ -145,4 +159,23 @@ pre{
     &.warn{
         background: #f60;
     }
+}
+.flex{
+    display: flex;
+    .flex-item{
+        flex: 1;
+    }
+}
+.fullflex{
+    flex: 1;
+}
+.avatar{
+    width: 50px;
+    border-radius: 25px;
+}
+.login-form{
+    padding-top: 50px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }

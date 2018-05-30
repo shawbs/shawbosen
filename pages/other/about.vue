@@ -6,7 +6,7 @@
             <p>{{userInfo.desc}}, 工作时间{{timer}}</p>
             <p>邮箱 572249500@qq.com</p>
             <p>微信</p>
-            <img src="~assets/image/we_code.jpg" alt="微信二维码" width="150">
+            <img src="~assets/image/we_code.jpg" alt="微信二维码" width="130">
         </div>
         
     </div>
@@ -41,5 +41,6 @@
 <style lang="scss">
     .about{
         padding: 100px 0;
+        color: #444;
     }
 </style>

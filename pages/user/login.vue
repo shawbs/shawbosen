@@ -1,23 +1,24 @@
 <template>
     <section class="container">
-
-        <form id="loginForm">
-            <div class="form-group">
-                <label>用户名</label>
-                <input type="email" v-model="username" name="username" class="form-control"  placeholder="输入用户名">
-                <small id="emailHelp" class="form-text text-muted"></small>
-            </div>
-            <div class="form-group">
-                <label>用户密码</label>
-                <input type="password" v-model="password" name="password" class="form-control" placeholder="输入用户密码" @keyup.enter="submitForm">
-            </div>
-            <button type="button" class="btn btn-primary mr-2" @click="submitForm">
-                登录
-                
-            </button>
-            <button type="reset" class="btn btn-danger">重置</button>
-            <p class="alert" :class="{'alert-success': msg == '登录成功','alert-danger': msg != '登录成功'}" v-if="msg">{{msg}}</p>
-        </form>
+        <div class="login-form">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="email" v-model="username" name="username" class="form-control"  placeholder="输入用户名">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label>用户密码</label>
+                    <input type="password" v-model="password" name="password" class="form-control" placeholder="输入用户密码" @keyup.enter="submitForm">
+                </div>
+                <button type="button" class="btn btn-primary mr-2" @click="submitForm">
+                    登录
+                    
+                </button>
+                <button type="reset" class="btn btn-danger">重置</button>
+                <p class="alert" :class="{'alert-success': msg == '登录成功','alert-danger': msg != '登录成功'}" v-if="msg">{{msg}}</p>
+            </form>
+        </div>
     </section>
 </template>
 

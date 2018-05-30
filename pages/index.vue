@@ -2,12 +2,13 @@
   <div class="index-page">
     <section class="container">
         <div class="m-button-group">
-            <nuxt-link type="button" class="btn btn-primary noborder" to="/">全部</nuxt-link>
+            <nuxt-link class="btn btn-primary noborder" to="/">全部</nuxt-link>
             <nuxt-link class="btn btn-dark noborder" :to="'/category/' + item.tag"  v-for="(item,index) in $store.state.tags " :key="index" :style="{backgroundColor: item.tagColor}">{{item.tag}}</nuxt-link>
         </div>
 
+
+        <hr class="my-3 row">
         <div class="main">
-          <hr class="my-3">
           <div class="line row" v-for="(item,key) in actricleList" :key="key" v-if="$store.state.loginState?true:(!item.private)">
             <div class="col-sm-8 link" :data-id="item.id" @click="linkArticleDetail">[{{item.tag}}]&nbsp;{{item.title}}</div>
             <div class="col-sm text-muted"><small>{{new Date(item.updateAt).format()}}</small></div>

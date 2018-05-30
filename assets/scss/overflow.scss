@@ -15,7 +15,7 @@
 .breadcrumb{
     background-color: rgba(0,0,0,.1);
     .breadcrumb-item.active,.breadcrumb-item a:hover {
-        color: #CD8500;
+        color: $green;
     }
 }
 
@@ -54,7 +54,7 @@
 }
 .dropdown-menu{
     border-radius: 4px;
-    border: 1px solid #6c757d;
+    @extend %boxshaw;
     background-color: #111;
     color: #666;
     .dropdown-item{
@@ -84,4 +84,24 @@
     height: 23px;
 }
 
+hr{
+    border-top: 1px solid #333333;
+}
 
+.form-control{
+    background: #111;
+    border: 1px solid #333;
+    color: $green;
+    &:focus{
+        color: $green;
+        background: #111;
+        box-shadow: none;
+        border-color: #333;
+    }
+}
+.editor-toolbar a{
+    color: inherit !important;
+}
+button:focus{
+    outline: none;
+}

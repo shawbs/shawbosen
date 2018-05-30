@@ -3,7 +3,10 @@
         <section class="container">
             <top-content />
             <div class="header">
-                <span @click="$router.push('/')">SHAWBOSEN</span>
+                <nuxt-link to="/">
+                    <img src="~assets/image/avatar.jpg" alt="" class="avatar mr-1">
+                    <span class="gray">SHAWBOSEN</span>
+                </nuxt-link>
             </div>
             
         </section>

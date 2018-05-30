@@ -9,7 +9,7 @@
         </nav>
 
         <article class="article ">
-            <h2>{{article.title}}</h2>
+            <h2 class="title">{{article.title}}</h2>
             <p class="text-muted clearfix" v-if="article">
                 <small class="mr-2">创建时间 {{new Date(article.createAt).format()}}</small>
                 <small>更新时间 {{new Date(article.updateAt).format()}}</small>

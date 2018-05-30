@@ -7,7 +7,7 @@
         <template v-if="!$store.state.user">
             <nuxt-link class="link" to="/user/login">登录</nuxt-link>
         </template>
-        <nuxt-link to="/other/about" class="small ml-2">关于我</nuxt-link>
+        <nuxt-link to="/other/about" class="small ml-2">关于</nuxt-link>
         
     </div>
 </template>

@@ -1,8 +1,8 @@
 <template>
     <div class="console-index-page">
-        <section class="container">
-            <div class="row">
-                <div class="col-sm">
+        <section class="container-full">
+            <div class="flex">
+                <div class="side">
                     <div class="list-group">
                         <button type="button" @click="newArticle"  class="list-group-item list-group-item-dark  list-group-item-action">新建</button>
                         
@@ -12,7 +12,7 @@
                             <ul class="list-group list-group-flush">
                                 
                                 <li class="list-group-item menu-item " :data-name="key" @click="selectArticle" v-for="(item,_key) in val" :key="_key" :data-id="item.id">
-                                    {{item.title}} 
+                                    {{item.title.slice(0,25)}} 
                                     <i class="delete-btn fa fa-times" @click="removeArticle" :data-id="item.id"></i>
                                 </li>
                             </ul>
@@ -20,22 +20,24 @@
                         
                     </div>
                 </div>
-                <div class="col-sm-9">
+                <div class="main">
                     <form id="articleForm" :data-id="article.id">
                         <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">标题</label>
+                            <label for="staticEmail" class="col-sm-2 text-center col-form-label">标题</label>
                             <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputTitle" :value="article.title" placeholder="输入标题" title="标题" name="title">
                             </div>
                         </div>
                         
                         <div class="form-group row">
-                            <label for="inputTag" class="col-sm-2 col-form-label">标签</label>
+                            <label for="inputTag" class="col-sm-2  text-center col-form-label">标签</label>
                             <div class="col-sm-10">
                                 <div class="input-group tag mb-3">
-                                    <input type="text" class="form-control" list="tags" id="inputTag" title="标签" name="tag" :value="tag" autocomplete="off"/>
-                                    <div class="dropdown-view" id="tags">
-                                        <div class="dropdown-line" @click="selectTag" v-for="(item,index) in $store.state.tags" :key="index" :data-color="item.tagColor">{{item.tag}}</div>
+                                    <div class="fullflex">
+                                        <input type="text" class="form-control" list="tags" id="inputTag" title="标签" name="tag" :value="tag" autocomplete="off"/>
+                                        <div class="dropdown-view" id="tags">
+                                            <div class="dropdown-line" @click="selectTag" v-for="(item,index) in $store.state.tags" :key="index" :data-color="item.tagColor">{{item.tag}}</div>
+                                        </div>
                                     </div>
                                     <div class="input-group-append">
                                         <input type="text" id="colorPicker" class="input-group-text" value="#ff0000" name="tagColor"/>
@@ -45,7 +47,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">内容</label>
+                            <label for="staticEmail" class="col-sm-2  text-center col-form-label">内容</label>
                             <div class="col-sm-10">
                             <textarea data-provide="markdown" data-iconlibrary="fa" rows="10" id="editor">{{article.content}}</textarea>
                             </div>
