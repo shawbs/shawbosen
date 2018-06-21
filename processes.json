@@ -1,0 +1,21 @@
+{
+  "apps": [
+    {
+      "name": "sanyi",
+      "cwd": "./",
+      "script": "npm",
+      "args":"start",
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "error_file": "/logs/sanyi.stderr.log",
+      "out_file": "/logs/sanyi.stderr.log",
+      "max_restarts": 10,
+      "max_memory_restart": "10M",
+      "watch": false,
+      "merge_logs": true,
+      "exec_interpreter": "node",
+      "exec_mode": "fork",
+      "autorestart": true,
+      "vizion": false
+    }
+  ]
+}

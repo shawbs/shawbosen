@@ -28,11 +28,11 @@
     .dropdown-view{
         display: none;
         position: absolute;
-        top: 30px;
+        top: 32px;
         left: 0;
         width: 100%;
         background: #000;
-        @extend %boxshaw;
+        // @extend %boxshaw;
         border-radius: 4px;
         z-index: 10;
         

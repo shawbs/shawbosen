@@ -4,7 +4,7 @@
             <div class="flex">
                 <div class="side">
                     <div class="list-group">
-                        <button type="button" @click="newArticle"  class="list-group-item list-group-item-dark  list-group-item-action">新建</button>
+                        <button type="button" @click="newArticle"  class="list-group-item list-group-item-danger  list-group-item-action">新建</button>
                         
                         <button type="button" @click="toggleList"  class="list-dropdown list-group-item list-group-item-action" v-for="(val,key,index) in actricleList" :key="key">
 
@@ -33,7 +33,7 @@
                             <label for="inputTag" class="col-sm-2  text-center col-form-label">标签</label>
                             <div class="col-sm-10">
                                 <div class="input-group tag mb-3">
-                                    <div class="fullflex">
+                                    <div class="fullflex mr-1">
                                         <input type="text" class="form-control" list="tags" id="inputTag" title="标签" name="tag" :value="tag" autocomplete="off"/>
                                         <div class="dropdown-view" id="tags">
                                             <div class="dropdown-line" @click="selectTag" v-for="(item,index) in $store.state.tags" :key="index" :data-color="item.tagColor">{{item.tag}}</div>
@@ -225,8 +225,16 @@
                     url: url,
                     param: parameter,
                     showload: true
-                }).then(data=>{
-                    p.toast('提交成功','success')
+                }).then(res=>{
+                    if(parameter.id ){
+                        p.toast('更新成功','success')
+                        this.article = res.data;
+                    }else{
+                        p.toast('发表成功', 'success')
+                        this.article = res.data;
+                    }
+                    console.log(this.article)
+                    this.getActricleByGroup();
                 })
 
             },
@@ -283,16 +291,16 @@
 
             selectArticle(e){
                 let target = e.target;
-                let _this = this;
-                _this.tag = $(target).data('name') || '';
+                // let this = this;
+                this.tag = $(target).data('name') || '';
                 if(target.nodeName == 'LI'){
-                    _this.getArticleInfo(target.dataset.id)
+                    this.getArticleInfo(target.dataset.id)
                     .then(data=>{
 
-                        _this.article = data.actricle;
-                        let val = _this.article.tag + '/' + _this.article.tagColor;
-                        simplemde.value(_this.article.content)  
-                        _this.setMinicolor(data.actricle.tagColor)  
+                        this.article = data.actricle;
+                        let val = this.article.tag + '/' + this.article.tagColor;
+                        simplemde.value(this.article.content)  
+                        this.setMinicolor(data.actricle.tagColor)  
                     })
                     
                 }

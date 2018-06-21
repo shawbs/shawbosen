@@ -23,16 +23,18 @@ const toast = (content,status)=>{
     
 }
 
-
+let hideLoaderTimer = null; // 每当显示加载条时，取消删除加载条的操作
 const showLoader = ()=>{
+    clearTimeout(hideLoaderTimer);
     if($('#loader').length== 0){
         let html = $(`<div id="loader" class="loader"><i  class="fa fa-spinner fa-pulse"></i></div>`);
         $('body').append(html);
     }
 }
-
 const hideLoader = ()=>{
-    $('#loader').remove();
+    hideLoaderTimer = setTimeout(function(){
+        $('#loader').remove();
+    },500)
 }
 
 module.exports = {

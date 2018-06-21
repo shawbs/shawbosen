@@ -45,12 +45,14 @@ export default {
         axios.defaults.headers['accesstoken'] = token;
         let showload = options.showload || false
         showload && p.showLoader()
+        commit('changeLoadState', true)
         return new Promise((resolve,reject)=>{
             axios.post(options.url, options.param || {})
             .then(res=>{
-                setTimeout(function(){
-                    showload && p.hideLoader()
-                },300)
+
+                showload && p.hideLoader()
+                commit('changeLoadState', false)
+
                 if(res.data.code == 401){
                     refreshToken()
                     .then(token=>{
@@ -70,6 +72,7 @@ export default {
             })
             .catch(err=>{
                 showload && p.hideLoader()
+                commit('changeLoadState', false)
                 console.log('request failed')
                 reject(err)
             })
@@ -85,7 +88,7 @@ export default {
         axios.defaults.headers['accesstoken'] = token;
         let showload = options.showload || false;
         showload && p.hideLoader()
-        // console.log(options,showload)
+        commit('changeLoadState', true)
         return new Promise((resolve,reject)=>{
             axios.get(options.url, {
                 params: options.param || {}
@@ -93,6 +96,7 @@ export default {
             .then(res=>{
 
                 showload && p.hideLoader()
+                commit('changeLoadState', false)
 
                 if(res.data.code == 401){
                     refreshToken()
@@ -114,6 +118,7 @@ export default {
             })
             .catch(err=>{
                 showload && p.hideLoader()
+                commit('changeLoadState', false)
                 console.log('request failed')
                 reject(err)
             })

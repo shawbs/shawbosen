@@ -4,7 +4,7 @@
             <top-content />
             <div class="header">
                 <nuxt-link to="/">
-                    <img src="~assets/image/avatar.jpg" alt="" class="avatar mr-1">
+                    <logo />
                     <span class="gray">SHAWBOSEN</span>
                 </nuxt-link>
             </div>

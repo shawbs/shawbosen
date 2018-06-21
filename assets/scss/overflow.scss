@@ -38,7 +38,7 @@
     .list-group {
         display: none;
         .list-group-item{
-            background-color: rgba(0,0,0,.5);
+            background: rgba(0,0,0,.1);
             border-radius: 0;
         }
         .list-group-item-danger{
@@ -54,7 +54,7 @@
 }
 .dropdown-menu{
     border-radius: 4px;
-    @extend %boxshaw;
+    // @extend %boxshaw;
     background-color: #111;
     color: #666;
     .dropdown-item{
@@ -90,17 +90,17 @@ hr{
 
 .form-control{
     background: #111;
-    border: 1px solid #333;
-    color: $green;
+    border: 1px solid #000000;
+    color: rgb(204, 102, 153);
     &:focus{
         color: $green;
         background: #111;
         box-shadow: none;
-        border-color: #333;
+        border-color: #000000;
     }
 }
 .editor-toolbar a{
-    color: inherit !important;
+    color: $acolor !important;
 }
 button:focus{
     outline: none;

@@ -14,17 +14,17 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     script: [
-      { src: 'https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'},
-      { src: 'https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js'},
-      { src: 'https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js'},
+      { src: '/lib/jquery.min.js'},
+      { src: '/lib/popper.min.js'},
+      { src: '/lib/bootstrap.min.js'},
       { src: '/lib/simplemde.min.js'},
       { src: '/lib/jquery.minicolors.min.js'},
       { src: '/lib/bootstrap-datetimepicker.min.js'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css'},
-      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css' },
+      { rel: 'stylesheet', href: '/lib/font-awesome.min.css'},
+      { rel: 'stylesheet', href: '/lib/bootstrap.min.css' },
       { rel: 'stylesheet', href: '/lib/simplemde.min.css'},
       { rel: 'stylesheet', href: '/lib/jquery.minicolors.css'},
       { rel: 'stylesheet', href: '/lib/bootstrap-datetimepicker.min.css'}

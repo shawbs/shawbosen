@@ -1,6 +1,19 @@
 <!DOCTYPE html>
-<!--[if IE 9]><html lang="en-US" class="lt-ie9 ie9" {{ HTML_ATTRS }}><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html {{ HTML_ATTRS }}><!--<![endif]-->
+<!--[if lte IE 9]>
+<html lang="en-US" class="lt-ie9 ie9">
+  <head>
+    <meta data-n-head="true" charset="utf-8">
+    <meta data-n-head="true" name="viewport" content="width=device-width, initial-scale=1">
+    <title>你的浏览器版本太低了，不支持当前页面浏览，请升级</title>
+  </head>
+  <body>
+    你的浏览器版本太低了，不支持当前页面浏览，请升级
+  </body>
+</html>
+<![endif]-->
+
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html {{ HTML_ATTRS }}>
   <head>
     {{ HEAD }}
   </head>
@@ -8,3 +21,4 @@
     {{ APP }}
   </body>
 </html>
+<!--<![endif]-->
